@@ -25,6 +25,11 @@ set(SOURCES
    clockmodel.cpp
    commondbustypes.cpp
    debug.cpp
+   useragent.cpp
+   session.cpp
+   sessionagent.cpp
+   networksession.cpp
+   counter.cpp
     )
 
 # Source    
@@ -36,6 +41,11 @@ set(HEADERS
     clockproxy.h
     clockmodel.h
     debug.h
+    useragent.h
+    session.h
+    sessionagent.h
+    networksession.h
+    counter.h
     )
 
 # Create DBUS interfaces
@@ -46,9 +56,12 @@ set_source_files_properties(connman-service.xml
     PROPERTIES CLASSNAME Service)
 set_source_files_properties(connman-technology.xml
     PROPERTIES CLASSNAME Technology)
+#set_source_files_properties(connman-session.xml
+#    PROPERTIES CLASSNAME Session)
 QT4_ADD_DBUS_INTERFACE(SOURCES connman-manager.xml manager)
 QT4_ADD_DBUS_INTERFACE(SOURCES connman-service.xml service)
 QT4_ADD_DBUS_INTERFACE(SOURCES connman-technology.xml technology)
+#QT4_ADD_DBUS_INTERFACE(SOURCES connman-session.xml session)
 
 # Apply moc and create the resources
 
