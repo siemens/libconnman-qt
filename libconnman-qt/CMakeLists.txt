@@ -26,7 +26,6 @@ set(SOURCES
    commondbustypes.cpp
    debug.cpp
    useragent.cpp
-   session.cpp
    sessionagent.cpp
    networksession.cpp
    counter.cpp
@@ -42,7 +41,6 @@ set(HEADERS
     clockmodel.h
     debug.h
     useragent.h
-    session.h
     sessionagent.h
     networksession.h
     counter.h
@@ -51,17 +49,24 @@ set(HEADERS
 # Create DBUS interfaces
 set_source_files_properties(connman-manager.xml
     PROPERTIES CLASSNAME Manager
-               INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/commondbustypes.h)
+    INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/commondbustypes.h)
+QT4_ADD_DBUS_INTERFACE(SOURCES connman-manager.xml manager)
+
 set_source_files_properties(connman-service.xml
-    PROPERTIES CLASSNAME Service)
+    PROPERTIES CLASSNAME Service
+    INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/commondbustypes.h)
+QT4_ADD_DBUS_INTERFACE(SOURCES connman-service.xml service)
+
 set_source_files_properties(connman-technology.xml
     PROPERTIES CLASSNAME Technology)
+QT4_ADD_DBUS_INTERFACE(SOURCES connman-technology.xml technology)
+
 #set_source_files_properties(connman-session.xml
 #    PROPERTIES CLASSNAME Session)
-QT4_ADD_DBUS_INTERFACE(SOURCES connman-manager.xml manager)
-QT4_ADD_DBUS_INTERFACE(SOURCES connman-service.xml service)
-QT4_ADD_DBUS_INTERFACE(SOURCES connman-technology.xml technology)
 #QT4_ADD_DBUS_INTERFACE(SOURCES connman-session.xml session)
+#TODO: Until we can generate the files from XML we need to add them
+set(SOURCES ${SOURCES} session.cpp)
+set(HEADERS ${HEADERS} session.h)
 
 # Apply moc and create the resources
 
